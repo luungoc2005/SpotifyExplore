@@ -9,7 +9,9 @@ var controls = controls || {};
 	}
 
 	markups = { // HTML tag IDs
-		search_box: "#searchBox",
-		results_box: "#searchResults"
+		search_box: "searchBox",
+		results_box: "searchResults",
+		search_item: "resultItem",
+		search_id: "search-id-"
 	}
 })(global, jQuery)
