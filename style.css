@@ -5,3 +5,12 @@
 .search_item:hover {
 	background-color: #00000F;
 }
+
+.item_name {
+	font-weight: bold;
+}
+
+.item_img {
+	max-width: 64px;
+	max-height: 64px;
+}

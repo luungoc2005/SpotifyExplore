@@ -12,17 +12,18 @@
 			//note to self: somehow "data": id attribute will cause this to not work
 			
 			$("<div />", { //name div
-				"text": name
+				"text": name,
+				"class": "item_name",
 			}).appendTo(wrapper);
 			
 			$("<div />", { //genres div
-				"text": genres
+				"text": genres,
+				"class": "item_genres",
 			}).appendTo(wrapper);
 			
 			$("<img />", { //img
 				"src": img,
-				"width": 64,
-				"height": 64,
+				"class": "item_img",
 			}).appendTo(wrapper);
 						
 			wrapper.click(function() {
