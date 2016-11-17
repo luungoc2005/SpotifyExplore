@@ -1,18 +1,20 @@
 (function (global, controls, $) {
 	controls.makeStar = function(parentName, popularity) { //popularity in base 100
 		var pop = Math.round(popularity / 20); //converts to base 5
+		var target = $("#" + parentName);
+		target.empty();
 		for (var i = 0; i < 5; i++) {
 			if (i <= pop) {
 				$("<span />", {
 					"class":"glyphicon glyphicon-star",
 					"aria-hidden":"true"
-				}).appendTo($("#" + parentName));
+				}).appendTo(target);
 			}
 			else {
 				$("<span />", {
 					"class":"glyphicon glyphicon-star-empty",
 					"aria-hidden":"true"
-				}).appendTo($("#" + parentName));
+				}).appendTo(target);
 			}
 		}
 	}
