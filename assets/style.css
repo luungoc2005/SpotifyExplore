@@ -1,3 +1,8 @@
+#searchBox {
+	resize: none;
+	
+}
+
 .search_item {
 	background-color: #0000FF;
 }
