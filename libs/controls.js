@@ -60,12 +60,8 @@
 	}
 	
 	controls.init = function() {
-		$("#" +markups.search_box).on("textInput input", function () {
+		$("#" +markups.search_box).on("textInput input focusin", function () {
 			spotify.searchFor($("#" + markups.search_box).val());
 		});
-		$("#" +markups.search_box).on("focusin", function () {
-			if ($("#" + markups.search_box).val() != "") controls.showSearch();
-		});
-		// controls.hideSearch();
 	}
 })(global, controls, jQuery)

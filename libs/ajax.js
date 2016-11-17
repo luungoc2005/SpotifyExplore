@@ -10,6 +10,7 @@
 	var selectedArtists = [];
 	var relatedArtists = [];
 	var topTracks = [];
+	var prevQuery = "";
 	
 	spotify.searchFor = function (query) {
 		if (query == null) return;
@@ -18,16 +19,19 @@
 			controls.clearResultBox();
 		}
 		else {
-			$.getJSON(spotifyUri.search.replace("{query}", encodeURIComponent(query)) + "&limit=" + defaults.max_results, 
+			if (prevQuery == query && currentResults != null && currentResults.length > 0) {
+				controls.showSearch();
+			}
+			else {			
+				$.getJSON(spotifyUri.search.replace("{query}", encodeURIComponent(query)) + "&limit=" + defaults.max_results, 
 				function(result) {
-					if (result == null) return;
-					
-					controls.clearResultBox();
-					
-					currentResults = result["artists"]["items"] || currentResults;
-					
-					spotify.addSearchResults();
-				});
+					if (result == null) return;					
+					controls.clearResultBox();					
+					currentResults = result["artists"]["items"] || currentResults;					
+					spotify.addSearchResults();					
+					prevQuery = query;
+				});				
+			}
 		}
 	};
 	
