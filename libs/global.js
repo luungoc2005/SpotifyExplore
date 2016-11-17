@@ -5,7 +5,7 @@ var controls = controls || {};
 
 (function (global, $) {
 	defaults = { // constants
-		max_results: 10
+		max_results: 6
 	}
 
 	markups = { // HTML tag IDs

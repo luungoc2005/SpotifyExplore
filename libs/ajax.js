@@ -13,18 +13,22 @@
 	
 	spotify.searchFor = function (query) {
 		if (query == null) return;
-		if (query == "") controls.clearResultBox();
-		
-		$.getJSON(spotifyUri.search.replace("{query}", encodeURIComponent(query)) + "&limit=" + defaults.max_results, 
-			function(result) {
-				if (result == null) return;
-				
-				controls.clearResultBox();
-				
-				currentResults = result["artists"]["items"] || currentResults;
-				
-				spotify.addSearchResults();
-			});	
+		if (query == "") {
+			controls.hideSearch();
+			controls.clearResultBox();
+		}
+		else {
+			$.getJSON(spotifyUri.search.replace("{query}", encodeURIComponent(query)) + "&limit=" + defaults.max_results, 
+				function(result) {
+					if (result == null) return;
+					
+					controls.clearResultBox();
+					
+					currentResults = result["artists"]["items"] || currentResults;
+					
+					spotify.addSearchResults();
+				});
+		}
 	};
 	
 	spotify.getTopTracks = function (artistID) {
@@ -58,12 +62,17 @@
 	}
 	
 	spotify.addSearchResults = function() {
-		$.each(currentResults, function(index, value) {
-			//if (index + 1 > defaults.max_results) return false;
-			
-			var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
-			controls.addSearchResultItem(index, value["name"], value["genres"].toString(), value["popularity"], imageUrl);
-		});
+		if (currentResults == null || currentResults.length == 0) {
+			controls.hideSearch();
+		}
+		else {
+			controls.showSearch();
+			$.each(currentResults, function(index, value) {
+				//if (index + 1 > defaults.max_results) return false;			
+				var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
+				controls.addSearchResultItem(index, value["name"], value["genres"].toString(), value["popularity"], imageUrl);
+			});
+		}
 	}
 	
 	spotify.pushCurrentArtist = function (artist) {
@@ -72,8 +81,12 @@
 		if (artist != null) selectedArtists.push(artist);
 	}
 	
-	spotify.gotoResult = function() {
-		if (currentResults != null && currentResults.length > 0) setCurrentArtist(currentResults[0]);
+	spotify.gotoResult = function(index) {
+		if (currentResults != null && currentResults.length > 0) {
+			selectedArtists = [];
+			spotify.pushCurrentArtist(currentResults[index]);
+			controls.hideSearch();
+		}
 	}
 	
 })(global, controls, spotify, jQuery);
