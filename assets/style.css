@@ -1,4 +1,4 @@
-#searchBox {
+/* #searchBox {
 	resize: none;
 	background-image: url(searchicon.png);
 	background-position: 10px 12px;
@@ -7,12 +7,36 @@
 	margin: 5px;
 	height: 100%;
 }
-
+ */
 #searchResults {
     position: relative;
 	min-width: 300px;
 	z-index: 50;
 	display: none;
+}
+
+.form-group {
+	display: inline;
+}
+
+.nextArtist {
+	opacity: 0.7;
+	-webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.nextArtist:hover {
+	opacity: 1;
+}
+
+.prevArtist {
+	opacity: 0.3;
+	-webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.prevArtist:hover {
+	opacity: 0.7;
 }
 
 .artistInfo>.panel {

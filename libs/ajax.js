@@ -49,7 +49,13 @@
 		
 		$.getJSON(spotifyUri.related_artists.replace("{id}", artistId),
 			function(result) {
-				relatedArtists = (result == null)?null:result["artists"];
+				if (result == null || result["artists"].length == 0) {
+					relatedArtists = [];
+				}
+				else {
+					relatedArtists = result["artists"];
+					
+				}
 			});
 	}
 	
