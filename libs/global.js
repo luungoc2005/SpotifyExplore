@@ -11,7 +11,8 @@ var controls = controls || {};
 	markups = { // HTML tag IDs
 		search_box: "searchBox",
 		results_box: "searchResults",
-		search_item: "search_item",
+		search_item: "search-item",
+		result_title: "search-item-title-",
 		search_id: "search-id-"
 	}
 })(global, jQuery)
