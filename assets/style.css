@@ -10,7 +10,7 @@
  */
 #searchResults {
     position: relative;
-	min-width: 300px;
+	width: 100% !important;
 	z-index: 50;
 	display: none;
 }

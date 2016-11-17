@@ -105,6 +105,12 @@
 		$("#" +markups.results_box).hide("fast")
 	}
 	
+	window.onclick = function(event) {
+		if (!event.target.matches("#" + markups.search_box)) {
+			controls.hideSearch();
+		}
+	}
+	
 	controls.init = function() {
 		$("#" +markups.search_box).on("textInput input focusin", function () {
 			spotify.searchFor($("#" + markups.search_box).val());
