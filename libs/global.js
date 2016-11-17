@@ -12,7 +12,7 @@ var controls = controls || {};
 		search_box: "searchBox",
 		results_box: "searchResults",
 		search_item: "search-item",
-		result_title: "search-item-title-",
-		search_id: "search-id-"
+		search_id: "search-id-",
+		current_artist: "current-artist"
 	}
 })(global, jQuery)

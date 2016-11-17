@@ -74,15 +74,27 @@
 			$.each(currentResults, function(index, value) {
 				//if (index + 1 > defaults.max_results) return false;			
 				var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
-				controls.addSearchResultItem(index, value["name"], value["genres"].toString(), value["popularity"], imageUrl);
+				controls.addSearchResultItem(index, 
+					value["name"], 
+					value["genres"].toString(), 
+					value["popularity"], 
+					imageUrl);
 			});
 		}
 	}
 	
-	spotify.pushCurrentArtist = function (artist) {
+	spotify.pushCurrentArtist = function (value) {
 /* 		currentArtist = (currentResults != null && currentResults.length>0)?
 						currentResults[id]:null; */
-		if (artist != null) selectedArtists.push(artist);
+		if (value != null) selectedArtists.push(value);
+		var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
+		controls.updateCurrentArtist(
+			value["name"], 
+			value["genres"].toString(), 
+			value["popularity"], 
+			imageUrl, 
+			value["external_urls"]["spotify"],
+			value["followers"]["total"]);
 	}
 	
 	spotify.gotoResult = function(index) {
