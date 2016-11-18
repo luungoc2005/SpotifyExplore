@@ -16,6 +16,16 @@
 		return (value == null || value.length == 0)?"":value[value.length - 1]["url"];
 	}
 	
+	function findHistory(uri) {
+		if (selectedArtists == null || selectedArtists.length == 0) return false;
+		
+		for (var i = 0; i < selectedArtists.length; i++) {
+			if (selectedArtists[i]["uri"] == uri) return true;
+		}
+		
+		return false;
+	}
+	
 	spotify.searchFor = function (query) {
 		if (query == null) return;
 		if (query == "") {
@@ -71,14 +81,21 @@
 	
 	spotify.addRelatedArtists = function() {
 		if (relatedArtists == null || relatedArtists.length == 0) return;
+		var count = 0;
+		relatedArtists = $.grep(relatedArtists, function(value, index) {
+			return !findHistory(value["uri"]);
+		});
 		$.each(relatedArtists, function(index, value) {
-			if (index > 2) return false;
 			controls.updateArtistSmall($("#" + markups.next_artist + index), 
 				value["name"], 
 				value["genres"].toString(), 
 				value["popularity"], 
 				getSmallestImage(value["images"]));
+				count++;
+			if (count > 2) return false;
 		});
+		console.log(relatedArtists.length);
+		controls.adjustRelated(count);
 	}
 	
 	spotify.addSearchResults = function() {
