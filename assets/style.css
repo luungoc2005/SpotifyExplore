@@ -23,6 +23,8 @@
 	opacity: 0.7;
 	-webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .nextArtist:hover {
@@ -33,6 +35,8 @@
 	opacity: 0.3;
 	-webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .prevArtist:hover {
