@@ -13,6 +13,7 @@ var controls = controls || {};
 		results_box: "searchResults",
 		search_item: "search-item",
 		search_id: "search-id-",
-		current_artist: "current-artist"
+		current_artist: "current-artist",
+		next_artist: "next-artist-"
 	}
 })(global, jQuery)

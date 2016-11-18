@@ -115,5 +115,10 @@
 		$("#" +markups.search_box).on("textInput input focusin", function () {
 			spotify.searchFor($("#" + markups.search_box).val());
 		});
+		for (var i = 0; i <= 2; i++) {
+			$("#" + markups.next_artist + i).on("click", function() {
+				spotify.pushRelatedArtist(this.id.replace(markups.next_artist,""));
+			});
+		}
 	}
 })(global, controls, jQuery)
