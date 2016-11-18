@@ -34,6 +34,8 @@
 		target.find(".item_followers").text(followers + " followers");
 		
 		controls.makeStar(target.find("#artist-pop"), pop);
+		
+		target.css("visibility", "visible");
 	}
 	
 	controls.updateArtistSmall = function(target, name, genres, pop, img) {
@@ -108,16 +110,14 @@
 	controls.adjustRelated = function(count) {
 		for (var i = 0; i <= 2; i++) {
 			if (i + 1 <= count) {
+				$("#" + markups.next_artist + i).css("visibility", "visible");	
 				if (i > 0) {
-					$("#" + markups.next_artist + i).show();
-				}
-				else {
-					$("#" + markups.next_artist + i).css("visibility", "visible");	
+					$("#" + markups.next_artist + i).show("fast");
 				}
 			}
 			else {
 				if (i > 0) {
-					$("#" + markups.next_artist + i).hide();
+					$("#" + markups.next_artist + i).hide("fast");
 				}
 				else {
 					$("#" + markups.next_artist + i).css("visibility", "hidden");

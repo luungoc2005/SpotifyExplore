@@ -125,7 +125,7 @@
 			value["followers"]["total"]);
 			
 		if (selectedArtists.length > 1) { //set previous artist
-			$("#" + markups.prev_artist).removeClass(markups.hide_info);
+			$("#" + markups.prev_artist).css("visibility", "visible");
 			var prev = selectedArtists[selectedArtists.length - 2];
 			controls.updateArtistSmall($("#" + markups.prev_artist), 
 				prev["name"], 
@@ -134,7 +134,7 @@
 				getSmallestImage(prev["images"]));
 		}
 		else {
-			$("#" + markups.prev_artist).addClass(markups.hide_info);
+			$("#" + markups.prev_artist).css("visibility", "hidden");
 		}
 			
 		//find related artists

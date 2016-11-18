@@ -35,13 +35,8 @@
 	display: inline;
 }
 
-.artistInfo.hiddenInfo {
-	opacity: 0;
-	-webkit-transition: opacity 0.5s;
-}
-
-.artistInfo.hiddenInfo:hover {
-	opacity: 0 !important;
+.artistInfo {
+	visibility: hidden;
 }
 
 .nextArtist {
