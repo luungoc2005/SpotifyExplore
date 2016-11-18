@@ -1,7 +1,7 @@
 (function (global, controls, $) {
 	//helper functions
 	function capitalize(textToFix) {
-		return textToFix.replace(/\b\w/g, function(l) { return l.toUpperCase()});
+		return (!textToFix)?"N/A":textToFix.replace(/\b\w/g, function(l) { return l.toUpperCase()});
 	}
 	
 	controls.makeStar = function(target, popularity) { //popularity in base 100

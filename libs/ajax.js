@@ -94,7 +94,7 @@
 				count++;
 			if (count > 2) return false;
 		});
-		console.log(relatedArtists.length);
+		// console.log(relatedArtists.length);
 		controls.adjustRelated(count);
 	}
 	
