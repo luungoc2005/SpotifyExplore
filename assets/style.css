@@ -35,6 +35,15 @@
 	display: inline;
 }
 
+.artistInfo.hiddenInfo {
+	opacity: 0;
+	-webkit-transition: opacity 0.5s;
+}
+
+.artistInfo.hiddenInfo:hover {
+	opacity: 0 !important;
+}
+
 .nextArtist {
 	opacity: 0.7;
 	-webkit-transition: opacity 0.5s;
@@ -48,13 +57,13 @@
 }
 
 .prevArtist {
-	opacity: 0.3;
 	-webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
 	cursor: pointer;
 	cursor: hand;
 	margin-top: -10px;
 	margin-bottom: -10px;
+	opacity: 0.3;
 }
 
 .prevArtist:hover {

@@ -108,12 +108,16 @@
 			value["followers"]["total"]);
 			
 		if (selectedArtists.length > 1) { //set previous artist
+			$("#" + markups.prev_artist).removeClass(markups.hide_info);
 			var prev = selectedArtists[selectedArtists.length - 2];
 			controls.updateArtistSmall($("#" + markups.prev_artist), 
 				prev["name"], 
 				prev["genres"].toString(), 
 				prev["popularity"], 
 				getSmallestImage(prev["images"]));
+		}
+		else {
+			$("#" + markups.prev_artist).addClass(markups.hide_info);
 		}
 			
 		//find related artists
@@ -134,7 +138,7 @@
 	}
 	
 	spotify.pushPrevArtist = function() {
-		if (selectedArtists.length > 2) {
+		if (selectedArtists.length > 1) {
 			selectedArtists.pop();
 			spotify.setCurrentArtist(selectedArtists[selectedArtists.length - 1]);
 		}
