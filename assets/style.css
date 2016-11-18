@@ -9,10 +9,26 @@
 }
  */
 #searchResults {
-    position: relative;
+    position: absolute;
 	width: 100% !important;
 	z-index: 50;
-	display: none;
+    display: none;
+}
+
+.results-container {
+	position: relative;
+}
+
+.spacer {
+	float: left;
+	display: relative;
+	height: 1px;
+	width: 100%;
+}
+
+.footer {
+	opacity: 0.6;
+	width: 100%;
 }
 
 .form-group {
@@ -37,6 +53,8 @@
     transition: opacity 0.5s;
 	cursor: pointer;
 	cursor: hand;
+	margin-top: -10px;
+	margin-bottom: -10px;
 }
 
 .prevArtist:hover {
@@ -47,16 +65,16 @@
 	padding: 10px;
 }
 
-.jumbotron {
-	position: absolute;
-}
-
 .navbar {
 	margin-bottom: 0px;
 }
 
 .search_item {
 	padding-left: 25px;
+}
+
+.jumbotron {
+	padding-bottom: 20px;
 }
 
 .item_img {
