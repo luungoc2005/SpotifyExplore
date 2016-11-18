@@ -142,7 +142,6 @@
 	
 	spotify.gotoResult = function(index) {
 		if (currentResults != null && currentResults.length > 0) {
-			selectedArtists = [];
 			spotify.pushCurrentArtist(currentResults[index]);
 			controls.hideSearch();
 		}
