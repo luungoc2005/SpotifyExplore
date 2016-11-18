@@ -12,6 +12,10 @@
 	var topTracks = [];
 	var prevQuery = "";
 	
+	function getSmallestImage(value) {
+		return (value == null || value.length == 0)?"":value[value.length - 1]["url"];
+	}
+	
 	spotify.searchFor = function (query) {
 		if (query == null) return;
 		if (query == "") {
@@ -69,12 +73,11 @@
 		if (relatedArtists == null || relatedArtists.length == 0) return;
 		$.each(relatedArtists, function(index, value) {
 			if (index > 2) return false;
-			var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
 			controls.updateArtistSmall($("#" + markups.next_artist + index), 
-			value["name"], 
-			value["genres"].toString(), 
-			value["popularity"], 
-			imageUrl);
+				value["name"], 
+				value["genres"].toString(), 
+				value["popularity"], 
+				getSmallestImage(value["images"]));
 		});
 	}
 	
@@ -85,34 +88,56 @@
 		else {
 			controls.showSearch();
 			$.each(currentResults, function(index, value) {
-				//if (index + 1 > defaults.max_results) return false;			
-				var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
+				//if (index + 1 > defaults.max_results) return false;
 				controls.addSearchResultItem(index, 
 					value["name"], 
 					value["genres"].toString(), 
 					value["popularity"], 
-					imageUrl);
+					getSmallestImage(value["images"]));
 			});
 		}
+	}
+	
+	spotify.setCurrentArtist = function(value) {
+		controls.updateCurrentArtist(
+			value["name"], 
+			value["genres"].toString(), 
+			value["popularity"], 
+			getSmallestImage(value["images"]), 
+			value["external_urls"]["spotify"],
+			value["followers"]["total"]);
+			
+		if (selectedArtists.length > 1) { //set previous artist
+			var prev = selectedArtists[selectedArtists.length - 2];
+			controls.updateArtistSmall($("#" + markups.prev_artist), 
+				prev["name"], 
+				prev["genres"].toString(), 
+				prev["popularity"], 
+				getSmallestImage(prev["images"]));
+		}
+			
+		//find related artists
+		spotify.getRelatedArtists(value["uri"].replace("spotify:artist:",""));
 	}
 	
 	spotify.pushCurrentArtist = function (value) {
 /* 		currentArtist = (currentResults != null && currentResults.length>0)?
 						currentResults[id]:null; */
-		if (value != null) selectedArtists.push(value);
-		var imageUrl = (value["images"] == null || value["images"].length == 0)?"":value["images"][value["images"].length - 1]["url"];
-		controls.updateCurrentArtist(
-			value["name"], 
-			value["genres"].toString(), 
-			value["popularity"], 
-			imageUrl, 
-			value["external_urls"]["spotify"],
-			value["followers"]["total"]);
-		spotify.getRelatedArtists(value["uri"].replace("spotify:artist:",""));
+		if (value != null) {
+			selectedArtists.push(value);
+			spotify.setCurrentArtist(value);
+		}		
 	}
 	
 	spotify.pushRelatedArtist = function (id) {
 		spotify.pushCurrentArtist(relatedArtists[id]);
+	}
+	
+	spotify.pushPrevArtist = function() {
+		if (selectedArtists.length > 2) {
+			selectedArtists.pop();
+			spotify.setCurrentArtist(selectedArtists[selectedArtists.length - 1]);
+		}
 	}
 	
 	spotify.gotoResult = function(index) {

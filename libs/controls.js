@@ -112,9 +112,10 @@
 	}
 	
 	controls.init = function() {
-		$("#" +markups.search_box).on("textInput input focusin", function () {
+		$("#" + markups.search_box).on("textInput input focusin", function () {
 			spotify.searchFor($("#" + markups.search_box).val());
 		});
+		$("#" + markups.prev_artist).on("click", spotify.pushPrevArtist);
 		for (var i = 0; i <= 2; i++) {
 			$("#" + markups.next_artist + i).on("click", function() {
 				spotify.pushRelatedArtist(this.id.replace(markups.next_artist,""));

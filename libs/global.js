@@ -14,6 +14,7 @@ var controls = controls || {};
 		search_item: "search-item",
 		search_id: "search-id-",
 		current_artist: "current-artist",
-		next_artist: "next-artist-"
+		next_artist: "next-artist-",
+		prev_artist: "prev-artist"
 	}
 })(global, jQuery)
