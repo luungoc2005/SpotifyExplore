@@ -1,6 +1,6 @@
 (function (global, controls, spotify, $) {
 	var spotifyUri = {
-		search: "https://api.spotify.com/v1/search?q={query}&type=artist",
+		search: "https://api.spotify.com/v1/search?",
 		artist: "https://api.spotify.com/v1/artists/", // followed by Id of artist
 		top_tracks: "https://api.spotify.com/v1/artists/{id}/top-tracks?country=US",
 		related_artists: "https://api.spotify.com/v1/artists/{id}/related-artists"
@@ -36,9 +36,13 @@
 			if (prevQuery == query && currentResults != null && currentResults.length > 0) {
 				controls.showSearch();
 			}
-			else {			
-				$.getJSON(spotifyUri.search.replace("{query}", encodeURIComponent(query)) + "&limit=" + defaults.max_results, 
-				function(result) {
+			else { 
+				var params = {
+					"query":query,
+					"type":"artist",
+					"limit":defaults.max_results
+				};
+				$.getJSON(spotifyUri.search + $.param(params), function(result) {
 					if (result == null) return;					
 					controls.clearResultBox();					
 					currentResults = result["artists"]["items"] || currentResults;					
