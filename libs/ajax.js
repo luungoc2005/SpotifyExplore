@@ -65,6 +65,7 @@
 	spotify.getRelatedArtists = function (artistID) {		
 		if (artistID == null || artistID == "") return;
 		
+		controls.adjustRelated(0); //temporary measure. TODO: animations/load notifier?
 		$.getJSON(spotifyUri.related_artists.replace("{id}", artistID),
 			function(result) {
 				if (result == null || result["artists"].length == 0) {
