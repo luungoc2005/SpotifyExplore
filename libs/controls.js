@@ -172,10 +172,27 @@
 			"text":params["name"],
 		}).appendTo(wrapper);
 		
+		// audio preview controls
+		
 		btn.on("click", function() {
-			var url = $(this).attr("data-location");
-			$("#" + markups.audio_player).attr("src",$(this).attr("data-location"));
-			$("#" + markups.audio_player).trigger("play");
+			var icon = $(this).find("span");
+			if (icon.hasClass("glyphicon-play")) { //is not playing		
+				$("#" + markups.audio_player).attr("src",$(this).attr("data-location"));
+				$("#" + markups.audio_player).trigger("play");
+				
+				// change class of all remaining buttons
+				$(".track-btn span").removeClass("glyphicon-pause");
+				$(".track-btn span").addClass("glyphicon-play");
+				
+				// change class of current button
+				icon.removeClass("glyphicon-play");
+				icon.addClass("glyphicon-pause");
+			}
+			else {				
+				$("#" + markups.audio_player).trigger("pause");
+				icon.removeClass("glyphicon-pause");
+				icon.addClass("glyphicon-play");
+			}
 		});
 	}
 	
