@@ -144,6 +144,41 @@
 		}
 	}
 	
+	//Top tracks - related functions
+	controls.clearTopTracks = function() {
+		$("." + markups.item_tracks).empty();
+	}
+	
+	controls.addTopTrack = function(params) {
+		var item = $("<li />", {
+			"class":"item-indi-track"
+		}).appendTo($("." + markups.item_tracks));
+		
+		var wrapper = $("<div />", {			
+		}).appendTo(item);
+		
+		var btn = $("<div />", {
+			"class":"track-btn",
+			"data-location":params["preview_url"]
+		}).appendTo(wrapper);
+		
+		$("<span />", {
+			"class":"glyphicon glyphicon-play",
+			"aria-hidden":"true"
+		}).appendTo(btn);
+		
+		$("<a />", {
+			"href":"#",
+			"text":params["name"],
+		}).appendTo(wrapper);
+		
+		btn.on("click", function() {
+			var url = $(this).attr("data-location");
+			$("#" + markups.audio_player).attr("src",$(this).attr("data-location"));
+			$("#" + markups.audio_player).trigger("play");
+		});
+	}
+	
 	controls.init = function() {
 		$("#" + markups.search_box).on("textInput input focusin", function () {
 			spotify.searchFor($("#" + markups.search_box).val());

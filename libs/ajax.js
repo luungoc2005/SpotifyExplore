@@ -69,9 +69,15 @@
 	spotify.getTopTracks = function (artistID) {
 		if (artistID == null || artistID == "") return;
 		
-		$.getJSON(spotifyUri.top_tracks.replace("{id}", artistId),
+		$.getJSON(spotifyUri.top_tracks.replace("{id}", artistID),
 			function(result) {
-				topTracks = (result == null)?null:result["tracks"];
+				if (result == null || result["tracks"].length == 0) {
+					topTracks = [];
+				}
+				else {
+					topTracks = result["tracks"];
+					spotify.addTopTracks();
+				}
 			});
 	}
 	
@@ -92,8 +98,9 @@
 	}
 	
 	spotify.addTopTracks = function() {
-		$.each(currentResults, function(index, value) {
-			
+		controls.clearTopTracks();
+		$.each(topTracks, function(index, value) {
+			controls.addTopTrack(value);
 		});
 	}
 	
@@ -156,6 +163,7 @@
 		}
 			
 		//find related artists
+		spotify.getTopTracks(value["uri"].replace("spotify:artist:",""));
 		spotify.getRelatedArtists(value["uri"].replace("spotify:artist:",""));
 	}
 	
