@@ -28,7 +28,7 @@
 		var target = $("#" + markups.current_artist);
 		
 		target.find(".item_url").attr("href", url);
-		target.find(".item_img").attr("src", img);
+		target.find(".current_img").attr("src", img);
 		target.find(".item_name").text(name + " ");
 		target.find(".item_genres").text("Genres: " + capitalize(genres));
 		target.find(".item_followers").text(followers + " followers");

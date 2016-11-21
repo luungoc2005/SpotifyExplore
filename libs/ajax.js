@@ -16,6 +16,19 @@
 		return (value == null || value.length == 0)?"":value[value.length - 1]["url"];
 	}
 	
+	function getMidImage(value) {
+		if (!value || value.length == 0) {
+			return ""
+		}
+		else if (value.length == 1) {
+			return value[0]["url"];
+		}
+		else
+		{
+			return value[value.length - 2]["url"];
+		}
+	}
+	
 	function findHistory(uri) {
 		if (selectedArtists == null || selectedArtists.length == 0) return false;
 		
@@ -125,7 +138,7 @@
 			value["name"], 
 			value["genres"].toString(), 
 			value["popularity"], 
-			getSmallestImage(value["images"]), 
+			getMidImage(value["images"]), 
 			value["external_urls"]["spotify"],
 			value["followers"]["total"]);
 			
