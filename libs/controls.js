@@ -90,7 +90,7 @@
 	
 	controls.updateArtistSmall = function(target, params) {
 		if (params) {
-			target.find(".item_img").attr("src", getSmallestImage(params["images"]);
+			target.find(".item_img").attr("src", getSmallestImage(params["images"]));
 			target.find(".item_name").text(params["name"] + " ");
 			target.find(".item_genres").text(capitalize(params["genres"].toString()));
 			controls.makeStar(target.find("#artist-pop"), params["popularity"]);
@@ -98,7 +98,7 @@
 	}
 	
 	controls.addSearchResultItem = function(id, params) {	
-		if (name != null && name != "") {
+		if (params) {
 			var list = $("<li />").appendTo($("#" + markups.results_box));
 			var item = $("<a />", {
 				"class": markups.search_item, // + " list-group-item",
@@ -134,7 +134,6 @@
 			}).appendTo(head);
 			
 			$("<div />", { //genres div
-				"text": capitalize(genres),
 				"class": "item_genres",
 				}).appendTo(content);
 				

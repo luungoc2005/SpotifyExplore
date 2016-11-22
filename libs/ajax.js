@@ -110,11 +110,7 @@
 			controls.showSearch();
 			$.each(currentResults, function(index, value) {
 				//if (index + 1 > defaults.max_results) return false;
-				controls.addSearchResultItem(index, 
-					value["name"], 
-					value["genres"].toString(), 
-					value["popularity"], 
-					getSmallestImage(value["images"]));
+				controls.addSearchResultItem(index, value);
 			});
 		}
 	}
@@ -124,12 +120,7 @@
 			
 		if (selectedArtists.length > 1) { //set previous artist
 			$("#" + markups.prev_artist).css("visibility", "visible");
-			var prev = selectedArtists[selectedArtists.length - 2];
-			controls.updateArtistSmall($("#" + markups.prev_artist), 
-				prev["name"], 
-				prev["genres"].toString(), 
-				prev["popularity"], 
-				getSmallestImage(prev["images"]));
+			controls.updateArtistSmall($("#" + markups.prev_artist), selectedArtists[selectedArtists.length - 2]);
 		}
 		else {
 			$("#" + markups.prev_artist).css("visibility", "hidden");
