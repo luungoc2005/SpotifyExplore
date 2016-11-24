@@ -177,6 +177,27 @@
 		}
 	}
 	
+	controls.addDetailsPopup(target, params) {	
+		var wrapper = $("<div />", {
+			"class": "popuptext media"
+		}).appendTo(target);
+		
+		target.on("click", function() {
+			wrapper.toggleClass("show");
+		});
+		
+		// Album image
+		var imgWrapper = $("<div /", {
+			"class":"media-left"
+		}).appendTo(wrapper);
+		
+		$("<img />", {
+			"class"="media-object",
+			
+		}).appendTo(imgWrapper);
+		
+	}
+	
 	controls.addTopTrack = function(params) {
 		var item = $("<li />", {
 			"class":"item-indi-track"
@@ -195,9 +216,9 @@
 			"aria-hidden":"true"
 		}).appendTo(btn);
 		
-		$("<a />", {
-			"href":"#",
+		var audioLink = $("<div />", {
 			"text":params["name"],
+			"class":"popup"
 		}).appendTo(wrapper);
 		
 		// audio preview controls
@@ -221,7 +242,10 @@
 				icon.addClass("glyphicon-play");
 			}
 		});
-	}
+		
+		// add popup
+		controls.addDetailsPopup(audioLink, params);
+	}	
 	
 	controls.init = function() {
 		$("#" + markups.search_box).on("textInput input focusin", function () {
