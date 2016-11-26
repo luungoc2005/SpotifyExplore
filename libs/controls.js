@@ -194,25 +194,53 @@
 		}
 	}
 	
-	controls.addDetailsPopup(target, params) {	
+	controls.addDetailsPopup = function(target, params) {	
 		var wrapper = $("<div />", {
-			"class": "popuptext media"
+			"class": "popuptext"
 		}).appendTo(target);
 		
-		target.on("click", function() {
-			wrapper.toggleClass("show");
-		});
-		
-		// Album image
-		var imgWrapper = $("<div /", {
-			"class":"media-left"
+		var innerWrapper = $("<div />", {
+			"class": "media"
 		}).appendTo(wrapper);
+						
+		// Album image
+		var imgWrapper = $("<div />", {
+			"class": "media-left"
+		}).appendTo(innerWrapper);
 		
 		$("<img />", {
-			"class"="media-object",
-			
+			"class":"media-object track_img",
+			"src":getSmallestImage(params["album"]["images"])
 		}).appendTo(imgWrapper);
+		// =====
 		
+		var content = $("<div />", {
+			"class": "media-body"
+			}).appendTo(innerWrapper);
+			
+		// Track title
+		var head = $("<h4 />", { //name div
+			"class": "media-heading",
+			"text": params["name"]
+			}).appendTo(content);
+			
+		$("<span />", {
+			"class": "item_name"
+		}).appendTo(head);
+		
+		var stars = $("<span />", {
+			"class": "badge",
+			"id": "artist-pop"
+		}).appendTo(head);
+		
+		controls.makeStar(stars, params["popularity"]);
+		
+		// Track description
+		
+		// add event handler
+		target.on("click", function() {
+			wrapper.toggleClass("show");
+		});		
 	}
 	
 	controls.addTopTrack = function(params) {
