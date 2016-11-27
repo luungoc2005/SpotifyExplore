@@ -1,12 +1,12 @@
-var spotify = spotify || {};
-var animations = animations || {};
-var global = global || {};
-var controls = controls || {};
+var spotify = spotify || {},
+    animations = animations || {},
+    global = global || {},
+    controls = controls || {};
 
 (function (global, $) {
 	defaults = { // constants
 		max_results: 6
-	}
+	};
 
 	markups = { // HTML tag IDs
 		search_box: "searchBox",
@@ -19,5 +19,5 @@ var controls = controls || {};
 		hide_info: "hiddenInfo",
 		item_tracks: "item-tracks",
 		audio_player: "player"
-	}
-})(global, jQuery)
+	};
+})(global, jQuery);
