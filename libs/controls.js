@@ -32,6 +32,7 @@
             player.stop(true).animate({volume: 0}, 500, function () { //lower volume, then change tracks
                 player.trigger("pause");
                 player.attr("src", uri);
+                player.trigger("load"); // could be unneeded but better be safe than sorry?
 
                 player.on("loadeddata", function () {
                     player.trigger("play"); //play the new track
@@ -238,20 +239,25 @@
 	};
 	
 	controls.addTopTrack = function (params) {
-		var item = $("<li />", {
-			"class" : "item-indi-track"
-		}).appendTo($("." + markups.item_tracks)),
+		var item = $("<div />", {
+				"class" : "item-indi-track"
+			}).appendTo($("." + markups.item_tracks)),
             
-            wrapper = $("<div />", {}).appendTo(item),
+            wrapper = $("<div />", {
+				"class" : "btn-group",
+				"role" : "group"
+			}).appendTo(item),
             
-            btn = $("<div />", {
-                "class" : "track-btn",
+            btn = $("<button />", {
+				"type" : "button",
+                "class" : "track-btn btn btn-default btn-sm",
                 "data-location" : params.preview_url
             }).appendTo(wrapper),
             
-            audioLink = $("<div />", {
+            audioLink = $("<button />", {
+                "type" : "button",
                 "text" : params.name,
-                "class" : "popup"
+                "class" : "btn btn-default btn-sm"
             }).appendTo(wrapper);
 		
 		$("<span />", {
@@ -281,7 +287,7 @@
 		});
 		
 		// add popup
-		controls.addDetailsPopup(audioLink, params);
+		// controls.addDetailsPopup(audioLink, params);
 	};
 	
 	controls.init = function () {
