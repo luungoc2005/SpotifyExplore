@@ -240,24 +240,18 @@
 	
 	controls.addTopTrack = function (params) {
 		var item = $("<div />", {
-				"class" : "item-indi-track"
+				"class" : "item-indi-track list-group-item"
 			}).appendTo($("." + markups.item_tracks)),
             
-            wrapper = $("<div />", {
-				"class" : "btn-group",
-				"role" : "group"
-			}).appendTo(item),
+            wrapper = $("<div />").appendTo(item),
             
-            btn = $("<button />", {
-				"type" : "button",
-                "class" : "track-btn btn btn-default btn-sm",
+            btn = $("<div />", {
+                "class" : "track-btn",
                 "data-location" : params.preview_url
             }).appendTo(wrapper),
             
-            audioLink = $("<button />", {
-                "type" : "button",
+            audioLink = $("<div />", {
                 "text" : params.name,
-                "class" : "btn btn-default btn-sm"
             }).appendTo(wrapper);
 		
 		$("<span />", {
