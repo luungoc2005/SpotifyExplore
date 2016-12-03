@@ -5,7 +5,8 @@ var spotify = spotify || {},
 
 (function (global, $) {
 	defaults = { // constants
-		max_results: 6
+		max_results: 6,
+        max_tracks: 5
 	};
 
 	markups = { // HTML tag IDs

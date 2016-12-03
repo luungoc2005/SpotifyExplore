@@ -81,6 +81,9 @@
 		controls.clearTopTracks();
 		$.each(topTracks, function (index, value) {
 			controls.addTopTrack(value);
+            if (index + 1 >= defaults.max_tracks) { 
+                return false;
+            }
 		});
 	};
 	
