@@ -251,6 +251,7 @@
             }).appendTo(wrapper),
             
             audioLink = $("<div />", {
+                "class" : "margin-left-10",
                 "text" : params.name,
             }).appendTo(wrapper);
 		
@@ -280,8 +281,8 @@
 			}
 		});
 		
-		// add popup
-		// controls.addDetailsPopup(audioLink, params);
+		add popup
+		controls.addDetailsPopup(audioLink, params);
 	};
 	
 	controls.init = function () {
