@@ -3,7 +3,8 @@
 		search: "https://api.spotify.com/v1/search?",
 		artist: "https://api.spotify.com/v1/artists/", // followed by Id of artist
 		top_tracks: "https://api.spotify.com/v1/artists/{id}/top-tracks?country=US",
-		related_artists: "https://api.spotify.com/v1/artists/{id}/related-artists"
+		related_artists: "https://api.spotify.com/v1/artists/{id}/related-artists",
+        album: "https://api.spotify.com/v1/albums/{id}"
 	},
         currentResults = [],
         selectedArtists = [],
@@ -61,6 +62,15 @@
 				}
 			});
 	};
+    
+    spotify.getAlbum = function (albumUri) {
+        if (!albumUri) { return; }
+        
+        return $.getJSON(spotifyUri.album.replace("{id}", albumUri))
+            .done(function (result) {
+                return result;
+            });
+    };
 	
 	spotify.getRelatedArtists = function (artistID) {
 		if (!artistID) { return; }
@@ -81,7 +91,7 @@
 		controls.clearTopTracks();
 		$.each(topTracks, function (index, value) {
 			controls.addTopTrack(value);
-            if (index + 1 >= defaults.max_tracks) { 
+            if (index + 1 >= defaults.max_tracks) {
                 return false;
             }
 		});

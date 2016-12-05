@@ -1,5 +1,12 @@
 (function (global, controls, $) {
 	//helper functions
+    function getDuration(duration_ms) {
+        var mins = Math.floor(duration_ms / 60000);
+        var secs = Math.floor(duration_ms / 1000 - mins * 60);
+        if (secs < 10) { secs = "0" + secs; }
+        return mins + ":" + secs;
+    }
+    
 	function capitalize(textToFix) {
 		return (!textToFix) ? "N/A" : textToFix.replace(/\b\w/g, function (l) { return l.toUpperCase(); });
 	}
@@ -190,9 +197,7 @@
 	};
 	
 	controls.addDetailsPopup = function (target, params) {
-		var wrapper = $("<div />", {
-            "class" : "popuptext"
-        }).appendTo(target),
+		var wrapper = $("<div />"),
             
             innerWrapper = $("<div />", {
                 "class" : "media"
@@ -204,12 +209,13 @@
             }).appendTo(innerWrapper),
             
             content = $("<div />", {
-                "class": "media-body"
+                "class": "media-body",
+                "style": "white-space: nowrap; "
 			}).appendTo(innerWrapper),
             
             head = $("<h4 />", { //name div
                 "class": "media-heading",
-                "text": params.name
+                "text": params.name + " "
 			}).appendTo(content),
             
             stars = $("<span />", {
@@ -231,11 +237,37 @@
 		controls.makeStar(stars, params.popularity);
 		
 		// Track description
-		
-		// add event handler
-		target.on("click", function () {
-			wrapper.toggleClass("show");
-		});
+        $("<div />", {
+            "text" : "Duration: " + getDuration(params.duration_ms)
+        }).appendTo(content);
+        
+        $("<div />", {
+            "text" : "Album: " + params.album.name
+        }).appendTo(content);
+        
+        spotify.getAlbum(params.album.uri.replace("spotify:album:","")).done(function (albumObj) {
+            if (albumObj) {
+                $("<div />", {
+                    "text" : "Release: " + new Date(albumObj.release_date).toLocaleDateString()
+                }).appendTo(content);
+
+                $("<div />", {
+                    "text" : albumObj.copyrights[0].text
+                }).appendTo(content);
+            }
+            
+            // append to target
+            target.attr("tabindex", "0");
+            target.attr("role", "button");
+            target.data("container", ".item-tracks");
+            target.data("toggle", "popover");
+            target.data("placement", "top");
+            target.data("content", wrapper.html());
+            target.popover({
+                "html" : true,
+                "trigger" : "focus"
+            });
+        });
 	};
 	
 	controls.addTopTrack = function (params) {
@@ -250,9 +282,9 @@
                 "data-location" : params.preview_url
             }).appendTo(wrapper),
             
-            audioLink = $("<div />", {
+            audioLink = $("<a />", {
                 "class" : "margin-left-10",
-                "text" : params.name,
+                "text" : params.name
             }).appendTo(wrapper);
 		
 		$("<span />", {
@@ -281,7 +313,7 @@
 			}
 		});
 		
-		add popup
+		// add popup
 		controls.addDetailsPopup(audioLink, params);
 	};
 	
